@@ -1,13 +1,4 @@
-<?php
-
-declare(strict_types=1);
-
-/**
- * @var App\Models\Log[] @logs
- */
-
-
-//@extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
     <h1>Logs</h1>

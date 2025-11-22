@@ -13,12 +13,15 @@ class LogController extends Controller
     public function index(Request $request)
     {
         $query = Log::query();
-
         if ($request->filled('level')) {
             $query->where('level', $request->level);
         }
         $logs = $query->paginate(10);
-        return view('logs.index', compact('logs'));
+        //return view('logs.index', compact('logs'));
+        return inertia('Logs', [
+            'logs' => $logs,
+            'filters' => $request->only(['level']),
+        ]);
     }
 
     /**
