@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('exchange_rates', function(Blueprint $table) {
             $table->id();
-            $table->integer('currency_a_id')->notNull();
-            $table->integer('currency_b_id')->notNull();
+            $table->foreignId('currency_a_id')
+                ->constrained('currencies');
+            $table->foreignId('currency_b_id')
+                ->constrained('currencies');
             $table->float('rate_buy')->nullable();
             $table->float('rate_sell')->nullable();
             $table->float('rate_cross')->nullable();
@@ -26,10 +28,6 @@ return new class extends Migration
             ],
                 'idx_currency_cross',
             );
-            $table->foreignId('currency_a_id')
-                ->constrained('currencies');
-            $table->foreignId('currency_b_id')
-                ->constrained('currencies');
         });
     }
 
