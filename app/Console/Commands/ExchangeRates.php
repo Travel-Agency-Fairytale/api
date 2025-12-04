@@ -31,13 +31,17 @@ class ExchangeRates extends Command
     {
         try {
             $apiData = $ExchangeRateService->fetch();
-            $this->info('Fetched exchange rates data from API');
-            $validated = $ExchangeRateService->validate($apiData);
-            $model = new ExchangeRate();
-            $data = $model->getRestructuredData($validated);
-            $result = $model->insert($data);
-            $this->info('Saved to Exchange Rates table ' . $result . ' rows');
-            return CommandAlias::SUCCESS;
+            if (!empty($apiData)) {
+                $this->info('Fetched exchange rates data from API');
+                $validated = $ExchangeRateService->validate($apiData);
+                $model = new ExchangeRate();
+                $data = $model->getRestructuredData($validated);
+                $result = $model->insert($data);
+                $this->info('Saved to Exchange Rates table ' . $result . ' rows');
+                return CommandAlias::SUCCESS;
+            }
+            $this->error('Failed to fetch exchange rates data: empty response from API');
+            return CommandAlias::FAILURE;
         } catch (Exception $e) {
             $this->error('Failed to fetch exchange rates data: ' . $e->getMessage());
             return CommandAlias::FAILURE;

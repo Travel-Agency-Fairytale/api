@@ -27,7 +27,7 @@ class MonobankProvider implements ExchangeRateProviderInterface
             $cacheKey = "monobank-rates";
             /** @var mixed[]|false $rates */
             $rates = Cache::get($cacheKey);
-            if ($rates === false) {
+            if ($rates === null) {
                 $rates = Http::withHeaders([
                     'Content-Type' => 'application/json',
                 ])->get(self::URL)->json();

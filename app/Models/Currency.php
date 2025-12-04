@@ -33,10 +33,7 @@ class Currency extends Model
      */
     public static function getIdByCode(int $code): ?int
     {
-        $currency = self::findOne(['numeric_code' => $code]);
-        if ($currency !== null) {
-            return $currency->id;
-        }
-        return $currency;
+        $currency = self::where(['numeric_code' => $code])->first();
+        return $currency->id ?? null;
     }
 }
