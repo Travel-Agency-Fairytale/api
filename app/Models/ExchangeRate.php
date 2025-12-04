@@ -37,29 +37,19 @@ class ExchangeRate extends Model
      * @param mixed[] $date Date array
      * @return mixed[]
      */
-    public function getRestructuredData(array $apiData, CurrencyRepository $CurrencyRepository): array
+    public function getRestructuredData(array $apiData): array
     {
         $data = [];
         foreach ($apiData as $item) {
-            $exchangeRate = $this->model::newInstance([
-                'currency_a_id' => $CurrencyRepository->getIdByCode($item['currencyCodeA']),
-                'currency_b_id' => $CurrencyRepository->getIdByCode($item['currencyCodeB']),
+            $exchangeRate = self::newInstance([
+                'currency_a_id' => $this->currencyA()->getRelated()->getIdByCode($item['currencyCodeA']),
+                'currency_b_id' => $this->currencyA()->getRelated()->getIdByCode($item['currencyCodeB']),
                 'date' => $item['date'],
                 'rate_buy' => $item['rateBuy'] ?? null,
                 'rate_sell' =>  $item['rateSell'] ?? null,
                 'rate_cross' => $item['rateCross'] ?? null,
             ]);
-//            $exchangeRate->currency_a_id = Currency::getIdByCode($item['currencyCodeA']);
-//            $exchangeRate->currency_b_id = Currency::getIdByCode($item['currencyCodeB']);
-//            $exchangeRate->date = $item['date'];
-//            $exchangeRate->rate_buy = $item['rateBuy'] ?? null;
-//            $exchangeRate->rate_sell = $item['rateSell'] ?? null;
-//            $exchangeRate->rate_cross = $item['rateCross'] ?? null;
-//            if ($exchangeRate->validate()) {
-//                $data[] = $exchangeRate->toArray();
-//            } else {
-//                Log::warning("Invalid exchange rate: " . json_encode($exchangeRate->getErrors()));
-//            }
+            $data[] = $exchangeRate->toArray();
         }
         return $data;
     }
