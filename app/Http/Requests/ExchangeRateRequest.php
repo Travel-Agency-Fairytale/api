@@ -24,7 +24,7 @@ class ExchangeRateRequest extends FormRequest
         return [
             'currencyCodeA' => ['required', 'numeric', 'exists:currencies,numeric_code'],
             'currencyCodeB' => ['required', 'numeric', 'exists:currencies,numeric_code'],
-            'date' => ['required', 'date'],
+            'date' => ['required', 'integer'],
             'rateBuy' => ['nullable', 'numeric'],
             'rateSell' => ['nullable', 'numeric'],
             'rateCross' => ['nullable', 'numeric'],

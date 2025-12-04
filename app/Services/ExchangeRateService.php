@@ -32,11 +32,16 @@ class ExchangeRateService
     /**
      * Validate exchange rates data.
      *
+     * @param mixed[] $apiData Exchange rates data from provider
      * @return mixed[]
      */
-    public function validate($apiData): array
+    public function validate(array $apiData): array
     {
         $rules = (new ExchangeRateRequest())->rules();
-        return Validator::make($apiData, $rules)->validate();
+        $validatedData = [];
+        foreach ($apiData as $data) {
+            $validatedData[] = Validator::make($data, $rules)->validate();
+        }
+        return $validatedData;
     }
 }
