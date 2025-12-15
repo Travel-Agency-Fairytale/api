@@ -107,5 +107,27 @@ class ExchangeRateRepositoryTest extends TestCase
         $this->assertIsArray($result);
         $this->assertEmpty($result);
     }
+
+    public function testUpdateOrInsertManyReturnsCorrectCount(): void
+    {
+        $exchangeRates = [
+            [
+                'currency_a_id' => 6,
+                'currency_b_id' => 3,
+                'rate_buy' => 1.2345,
+                'rate_sell' => 1.3456,
+                'date' => strtotime('-5 days'),
+            ],
+            [
+                'currency_a_id' => 3,
+                'currency_b_id' => 6,
+                'rate_buy' => 0.9876,
+                'rate_sell' => 1.0987,
+                'date' => strtotime('-3 days'),
+            ],
+        ];
+        $count = $this->repository->updateOrInsertMany($exchangeRates, false);
+        $this->assertSame(2, $count);
+    }
 }
 

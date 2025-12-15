@@ -14,4 +14,13 @@ interface ExchangeRateRepositoryInterface
      * @return mixed[]
      */
     public function getExchangeRateByDate(?int $startDate, ?int $endDate): array;
+
+    /**
+     * This method is used to update or insert multiple exchange rates.
+     *
+     * @param mixed[] $validExchangeRates Array of valid exchange rates
+     * @param bool $shouldRestructure Indicates whether restructuring is needed
+     * @return int Number of exchange rates updated or inserted
+     */
+    public function updateOrInsertMany(array $validExchangeRates, bool $shouldRestructure = true): int;
 }
