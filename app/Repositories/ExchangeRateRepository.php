@@ -36,4 +36,18 @@ class ExchangeRateRepository implements ExchangeRateRepositoryInterface
         }
         return $exchangeRates->toArray();
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function updateOrInsertMany(array $validExchangeRates, bool $shouldRestructure = true): int
+    {
+        $exchangeRates = $shouldRestructure ?
+            $this->model->getRestructuredData($validExchangeRates) :
+            $validExchangeRates;
+        $uniqueBy = ['currency_a_id', 'currency_b_id', 'date'];
+        $updateColumns = array_diff(array_keys($exchangeRates[0] ?? []), $uniqueBy);
+        $this->model->upsert($exchangeRates, $uniqueBy, $updateColumns);
+        return count($exchangeRates);
+    }
 }

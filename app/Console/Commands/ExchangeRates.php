@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\ExchangeRate;
+use App\Repositories\Interfaces\ExchangeRateRepositoryInterface;
 use App\Services\ExchangeRateService;
 use Exception;
 use Illuminate\Console\Command;
@@ -25,6 +25,15 @@ class ExchangeRates extends Command
     protected $description = 'Gets and stores exchange rates from external API';
 
     /**
+     * Constructor.
+     * @inheritDoc
+     */
+    public function __construct(private readonly ExchangeRateRepositoryInterface $exchangeRateRepository)
+    {
+        parent::__construct();
+    }
+
+    /**
      * Execute the console command.
      */
     public function handle(ExchangeRateService $ExchangeRateService)
@@ -34,9 +43,7 @@ class ExchangeRates extends Command
             if (!empty($apiData)) {
                 $this->info('Fetched exchange rates data from API');
                 $validated = $ExchangeRateService->validate($apiData);
-                $model = new ExchangeRate();
-                $data = $model->getRestructuredData($validated);
-                $result = $model->insert($data);
+                $result = $this->exchangeRateRepository->updateOrInsertMany($validated);
                 $this->info('Saved to Exchange Rates table ' . $result . ' rows');
                 return CommandAlias::SUCCESS;
             }
