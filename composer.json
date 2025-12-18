@@ -19,6 +19,7 @@
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.5",
         "fakerphp/faker": "^1.23",
+        "friendsofphp/php-cs-fixer": "^3.92",
         "laravel/breeze": "^2.3",
         "laravel/pail": "^1.1",
         "laravel/pint": "^1.13",
@@ -60,7 +61,9 @@
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
         ],
-        "phpstan": "phpstan analyse --memory-limit=512M --generate-baseline"
+        "phpstan": "phpstan analyse --memory-limit=512M --generate-baseline",
+        "lint": "php-cs-fixer fix --dry-run --diff",
+        "lint-fix": "php-cs-fixer fix --diff"
     },
     "extra": {
         "laravel": {

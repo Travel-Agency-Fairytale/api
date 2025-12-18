@@ -1,3 +1,6 @@
+[![Code Style](https://img.shields.io/badge/code%20style-php--cs--fixer-brightgreen)](
+https://github.com/FriendsOfPHP/PHP-CS-Fixer
+)
 [![CI](https://github.com/Travel-Agency-Fairytale/api/actions/workflows/ci.yml/badge.svg)](
 https://github.com/Travel-Agency-Fairytale/api/actions/workflows/ci.yml
 )

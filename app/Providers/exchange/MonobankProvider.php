@@ -24,7 +24,7 @@ class MonobankProvider implements ExchangeRateProviderInterface
     {
         $rates = [];
         try {
-            $cacheKey = "monobank-rates";
+            $cacheKey = 'monobank-rates';
             /** @var mixed[]|false $rates */
             $rates = Cache::get($cacheKey);
             if ($rates === null) {
