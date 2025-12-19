@@ -4,6 +4,8 @@ https://github.com/FriendsOfPHP/PHP-CS-Fixer
 [![CI](https://github.com/Travel-Agency-Fairytale/api/actions/workflows/ci.yml/badge.svg)](
 https://github.com/Travel-Agency-Fairytale/api/actions/workflows/ci.yml
 )
+![PHP](https://img.shields.io/badge/php-%3E%3D8.4-777bb4)
+![Last Commit](https://img.shields.io/github/last-commit/Travel-Agency-Fairytale/api)
 # Travel-Agency-Fairytale API
 
 This repository contains the core API backend for Travel-Agency-Fairytale. The API is designed to communicate with external services and aggregate travel-related data for downstream applications.
