@@ -44,3 +44,6 @@ jobs:
           else
             vendor/bin/phpstan analyse --configuration=phpstan.dev.neon --no-progress
           fi
+
+      - name: Run tests
+        run: vendor/bin/phpunit
