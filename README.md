@@ -10,12 +10,6 @@ https://github.com/Travel-Agency-Fairytale/api/actions/workflows/ci.yml
 
 This repository contains the core API backend for Travel-Agency-Fairytale. The API is designed to communicate with external services and aggregate travel-related data for downstream applications.
 
-## Language Composition
-
-- PHP (63%)
-- JavaScript (31%)
-- Blade (6%)
-
 ## Purpose
 
 This API serves to:
