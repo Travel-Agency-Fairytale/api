@@ -1,0 +1,11 @@
+backend:
+  - app/**
+
+database:
+  - database/**
+
+frontend:
+  - resourses/**
+
+tests:
+  - tests/**
