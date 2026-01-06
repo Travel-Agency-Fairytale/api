@@ -1,11 +1,19 @@
 backend:
-  - app/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - app/**
 
 database:
-  - database/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - database/**
 
 frontend:
-  - resourses/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - resourses/**
 
 tests:
-  - tests/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - tests/**
