@@ -18,6 +18,14 @@ jobs:
         uses: hmarr/auto-approve-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Check working hours
+        run: |
+          HOUR=$(date +%H)
+          if [ "$HOUR" -lt 9 ] || [ "$HOUR" -gt 17 ]; then
+            echo "Outside merge window"
+            exit 1
+          fi
 
       - name: Enable auto-merge
         uses: peter-evans/enable-pull-request-automerge@v3
