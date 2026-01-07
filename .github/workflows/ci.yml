@@ -82,4 +82,5 @@ jobs:
           DB_PASSWORD: password
         run:  |
           php artisan migrate --force
+          php artisan db:seed --force
           php artisan test
