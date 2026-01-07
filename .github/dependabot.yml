@@ -4,6 +4,8 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    labels:
+      - dependencies
     commit-message:
       prefix: "github-actions"
     cooldown:
@@ -12,6 +14,8 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    labels:
+      - dependencies
     commit-message:
       prefix: "npm"
     cooldown:
@@ -20,6 +24,8 @@ updates:
     directory: "/" 
     schedule:
       interval: "weekly"
+    labels:
+      - dependencies
     allow:
       - dependency-type: "all"
     commit-message:
