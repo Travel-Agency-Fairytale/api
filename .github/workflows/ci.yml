@@ -9,6 +9,22 @@ jobs:
   QA:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: sail
+          MYSQL_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     strategy:
       matrix:
         php-version: [ '8.4' ]
@@ -34,6 +50,11 @@ jobs:
       - name: Install dependencies
         run: composer install --no-interaction --no-progress --prefer-dist
 
+      - name: Prepare environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
       - name: Run PHP-CS-Fixer (lint)
         run: composer lint
 
@@ -44,3 +65,22 @@ jobs:
           else
             vendor/bin/phpstan analyse --configuration=phpstan.dev.neon --no-progress
           fi
+
+      - name: Run tests
+        if: |
+          github.event_name == 'push' ||
+          (
+            github.event_name == 'pull_request' &&
+            !contains(github.event.pull_request.labels.*.name, 'ci')
+          )
+        env:
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: test_db
+          DB_USERNAME: sail
+          DB_PASSWORD: password
+        run:  |
+          php artisan migrate --force
+          php artisan db:seed --force
+          php artisan test
