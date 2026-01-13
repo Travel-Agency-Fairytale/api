@@ -1,0 +1,37 @@
+name: Notify on successful merge
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  notify:
+    if: github.event.pull_request.merged == true &&
+        github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send email notification
+        uses: dawidd6/action-send-mail@v7
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+
+          subject: >
+            ✅ PR merged: #${{ github.event.pull_request.number }}
+
+          to: ${{ secrets.NOTIFY_EMAIL }}
+          from: GitHub Actions <${{ secrets.SMTP_USERNAME }}>
+
+          body: |
+            PR successfully merged 🎉
+
+            Repository: ${{ github.repository }}
+            Title: ${{ github.event.pull_request.title }}
+            Author: ${{ github.event.pull_request.user.login }}
+            Merged by: ${{ github.actor }}
+
+            Link:
+            ${{ github.event.pull_request.html_url }}

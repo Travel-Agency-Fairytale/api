@@ -7,9 +7,9 @@
         "lint": "eslint resources/js --ext .js,.jsx --ignore-path .gitignore --fix"
     },
     "devDependencies": {
-        "@headlessui/react": "^2.0.0",
-        "@inertiajs/react": "^2.3.4",
-        "@tailwindcss/forms": "^0.5.3",
+        "@headlessui/react": "^2.2.9",
+        "@inertiajs/react": "^2.3.6",
+        "@tailwindcss/forms": "^0.5.11",
         "@vitejs/plugin-react": "^5.1.2",
         "autoprefixer": "^10.4.23",
         "axios": "^1.7.4",
