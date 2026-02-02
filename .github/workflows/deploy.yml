@@ -1,0 +1,36 @@
+name: Deploy to Server via SSH
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: 🛡️ Add SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY_PROJECT }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "Host github.com\n  StrictHostKeyChecking no\n  IdentityFile ~/.ssh/id_ed25519" >> ~/.ssh/config
+          chmod 600 ~/.ssh/config
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.2.4
+        with:
+            host: ${{ vars.SSH_HOST }}
+            username: ${{ vars.SSH_USER }}
+            key: ${{ secrets.SSH_KEY }}
+            passphrase: ${{ secrets.SSH_PASSPHRASE }}
+            script: |
+              cd fairytale.com.ua/api/
+              git pull origin main
+              composer install --no-dev --optimize-autoloader
+              php artisan migrate
