@@ -23,7 +23,7 @@ jobs:
           chmod 600 ~/.ssh/config
 
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.2.4
+        uses: appleboy/ssh-action@v1.2.5
         with:
             host: ${{ vars.SSH_HOST }}
             username: ${{ vars.SSH_USER }}
