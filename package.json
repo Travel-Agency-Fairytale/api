@@ -9,8 +9,8 @@
       "test": "echo \"No tests yet\""
   },
   "devDependencies": {
-    "@headlessui/react": "^2.2.9",
-    "@inertiajs/react": "^3.0.2",
+    "@headlessui/react": "^2.2.10",
+    "@inertiajs/react": "^3.0.3",
     "@tailwindcss/forms": "^0.5.11",
     "@vitejs/plugin-react": "^6.0.1",
     "autoprefixer": "^10.4.27",
@@ -24,10 +24,10 @@
     "husky": "^9.1.7",
     "laravel-vite-plugin": "^3.0.1",
     "postcss": "^8.5.8",
-    "prettier": "^3.8.1",
+    "prettier": "^3.8.2",
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "react": "^19.2.1",
+    "react": "^19.2.5",
     "react-dom": "^19.2.4",
     "tailwindcss": "^4.2.2",
     "vite": "^8.0.8"
