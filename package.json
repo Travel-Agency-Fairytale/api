@@ -23,7 +23,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "husky": "^9.1.7",
     "laravel-vite-plugin": "^3.0.1",
-    "postcss": "^8.5.8",
+    "postcss": "^8.5.15",
     "prettier": "^3.8.2",
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-tailwindcss": "^0.7.2",
