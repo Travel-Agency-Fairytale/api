@@ -34,3 +34,4 @@ _ide_helper_models.php
 /storage/framework/sessions/*
 /storage/framework/testing/*
 /storage/framework/views/*
+.aider*
