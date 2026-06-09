@@ -35,3 +35,4 @@ _ide_helper_models.php
 /storage/framework/testing/*
 /storage/framework/views/*
 .aider*
+CONVENTIONS.md
