@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Http\Requests\ExchangeRateRequest;
 use App\Providers\exchange\ExchangeRateProviderInterface;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class ExchangeRateService
@@ -26,7 +27,20 @@ class ExchangeRateService
      */
     public function fetch(): array
     {
-        return $this->provider->getRates();
+        // Check if cached data exists and is not expired
+        if ($cachedData = Cache::get('exchange_rates')) {
+            return $cachedData;
+        }
+
+        try {
+            $apiData = $this->provider->getRates();
+            Cache::put('exchange_rates', $apiData, now()->addHours(24)); // Cache for 24 hours
+            return $apiData;
+        } catch (\Exception $e) {
+            // Log the error or handle it as needed
+            \Log::error('Failed to fetch exchange rates: ' . $e->getMessage());
+            throw new \RuntimeException('Failed to fetch exchange rates', 0, $e);
+        }
     }
 
     /**
